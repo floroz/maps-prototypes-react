@@ -9,6 +9,38 @@ const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 const Marker = ({ children }) => children;
 
+const customOptionStyles = [
+  {
+    featureType: "landscape",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#cfe9d1",
+      },
+    ],
+  },
+  {
+    featureType: "road",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        color: "#ffffff",
+      },
+      {
+        weight: 1,
+      },
+    ],
+  },
+];
+
 const GoogleMap = () => {
   const mapRef = useRef(null);
   const [zoom, setZoom] = useState(8);
@@ -69,6 +101,7 @@ const GoogleMap = () => {
           ]);
           setZoom(zoom);
         }}
+        options={{ styles: customOptionStyles }}
       >
         {clusters.map((cluster) => {
           const [lng, lat] = cluster.geometry.coordinates;
