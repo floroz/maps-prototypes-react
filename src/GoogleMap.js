@@ -129,7 +129,7 @@ const GoogleMap = () => {
                     onClusterClick({ clusterId: cluster.id, lat, lng })
                   }
                 >
-                  <p>Tree Planted: {point_count}</p>
+                  <p>{point_count}</p>
                 </div>
               </Marker>
             );
