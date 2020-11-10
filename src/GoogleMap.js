@@ -63,7 +63,7 @@ const GoogleMap = () => {
     points,
     bounds,
     zoom,
-    option: { radius: 50, maxZoom: 20 },
+    option: { radius: 200, maxZoom: 20 },
   });
 
   const onMarkerClick = (clusterProperties) => {
@@ -86,7 +86,7 @@ const GoogleMap = () => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: API_KEY }}
         defaultZoom={8}
-        style={{ width: " 80%", height: "80%" }}
+        style={{ width: 800, height: 800 }}
         defaultCenter={{ lat: 51.509865, lng: -0.118092 }}
         ref={mapRef}
         zoom={zoom}
@@ -129,7 +129,7 @@ const GoogleMap = () => {
                     onClusterClick({ clusterId: cluster.id, lat, lng })
                   }
                 >
-                  <p> {point_count}</p>
+                  <p>Tree Planted: {point_count}</p>
                 </div>
               </Marker>
             );

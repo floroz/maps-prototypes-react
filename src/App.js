@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GoogleMap from "./GoogleMap";
 import Homepage from "./Homepage";
-import ReactGoogleMap from "./ReactGoogleMap";
+import Mapbox from "./Mapbox";
 
 function App() {
   return (
@@ -10,9 +10,10 @@ function App() {
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/google-map" exact component={GoogleMap} />
-        <Route path="/react-map" component={ReactGoogleMap} />
+        <Route path="/mapbox" component={Mapbox} />
       </Switch>
     </Router>
   );
 }
+
 export default App;
