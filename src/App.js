@@ -7,8 +7,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={GoogleMap} />
-        <Route path="/react" component={ReactGoogleMap} />
+        <Route path="/google-map" exact component={GoogleMap} />
+        <Route path="/react-map" component={ReactGoogleMap} />
       </Switch>
     </Router>
   );
