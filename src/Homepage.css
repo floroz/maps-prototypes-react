@@ -1,0 +1,18 @@
+.homepage__main {
+  padding: 20px;
+}
+
+.homepage__title {
+  margin: 10px 0;
+  font-size: 23px;
+}
+
+.homepage__link-group {
+  display: flex;
+  flex-flow: column;
+}
+
+.homepage__link-group > * {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
