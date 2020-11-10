@@ -12,6 +12,7 @@
     "react-map-gl": "^5.2.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "source-map-explorer": "^2.5.0",
     "supercluster": "^7.1.0",
     "use-supercluster": "^0.2.9",
     "web-vitals": "^0.2.4"
@@ -20,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
