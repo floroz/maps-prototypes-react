@@ -68,25 +68,26 @@ const Map = () => {
     iconSize: [25, 25],
   });
 
-  const generateClusters = () => {
-    return clusters.map((cluster) => {
-      const [lng, lat] = cluster.geometry.coordinates;
-      const { cluster: isCluster, treeId, point_count } = cluster.properties;
+  return (
+    <MarkerClusterGroup>
+      {clusters.map((cluster) => {
+        const [lng, lat] = cluster.geometry.coordinates;
+        const { cluster: isCluster, treeId, point_count } = cluster.properties;
+        console.log(cluster);
 
-      if (isCluster) {
-        const dimension = Math.min(
-          80,
-          25 + (point_count / points.length) * 500
-        );
+        if (isCluster) {
+          const dimension = Math.min(
+            80,
+            25 + (point_count / points.length) * 500
+          );
 
-        return <Marker position={[lng, lat]} key={treeId} />;
-      } else {
-        return <Marker position={[lng, lat]} key={treeId} icon={treeIcon} />;
-      }
-    });
-  };
-
-  return generateClusters();
+          return <Marker position={[lng, lat]} key={treeId} />;
+        } else {
+          return <Marker position={[lng, lat]} key={treeId} icon={treeIcon} />;
+        }
+      })}
+    </MarkerClusterGroup>
+  );
 };
 
 const Leaflet = () => {
@@ -107,9 +108,7 @@ const Leaflet = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <MarkerClusterGroup>
-          <Map />
-        </MarkerClusterGroup>
+        <Map />
       </MapContainer>
     </div>
   );
