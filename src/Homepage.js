@@ -9,6 +9,7 @@ const Homepage = () => {
       <div className="homepage__link-group">
         <Link to="/google-map">Google Map</Link>
         <Link to="/mapbox">Mapbox</Link>
+        <Link to="/leaflet">Leaflet</Link>
       </div>
     </main>
   );
