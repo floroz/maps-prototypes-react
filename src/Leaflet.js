@@ -1,29 +1,14 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import {
-  MapContainer,
-  Marker,
-  TileLayer,
-  Popup,
-  useMap,
-  useMapEvents,
-} from "react-leaflet";
+import React from "react";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import data from "./data";
 import treeImg from "./images/tree.png";
-import useSupercluster from "use-supercluster";
 import "leaflet/dist/leaflet.css";
-import "react-leaflet-markercluster/dist/styles.min.css";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 
 const DEFAULT_ZOOM = 8;
 
 const Map = () => {
-  const map = useMap();
-  const [bounds, setBounds] = useState(null);
-  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
-  const [selectedMarker, setSelectedMarker] = useState(null);
-
-  const points = data.map((tree) => ({
+  const points = data.slice(0, 50).map((tree) => ({
     type: "Feature",
     properties: {
       cluster: false,
@@ -36,58 +21,18 @@ const Map = () => {
     },
   }));
 
-  const { clusters, supercluster } = useSupercluster({
-    points,
-    bounds,
-    zoom,
-    option: { radius: 200, maxZoom: 20 },
-  });
-
-  const updateMap = useCallback(() => {
-    const b = map.getBounds();
-    setBounds([
-      b.getSouthWest().lng,
-      b.getSouthWest().lat,
-      b.getNorthEast().lng,
-      b.getNorthEast().lat,
-    ]);
-
-    setZoom(map.getZoom());
-  }, []);
-
-  useEffect(() => {
-    updateMap();
-  }, [updateMap]);
-
-  useMapEvents({
-    update: updateMap,
-  });
-
   const treeIcon = new L.icon({
     iconUrl: treeImg,
     iconSize: [25, 25],
   });
 
-  return (
-    <MarkerClusterGroup>
-      {clusters.map((cluster) => {
-        const [lng, lat] = cluster.geometry.coordinates;
-        const { cluster: isCluster, treeId, point_count } = cluster.properties;
-        console.log(cluster);
-
-        if (isCluster) {
-          const dimension = Math.min(
-            80,
-            25 + (point_count / points.length) * 500
-          );
-
-          return <Marker position={[lng, lat]} key={treeId} />;
-        } else {
-          return <Marker position={[lng, lat]} key={treeId} icon={treeIcon} />;
-        }
-      })}
-    </MarkerClusterGroup>
-  );
+  return points.map((point) => (
+    <Marker
+      position={[point.geometry.coordinates[1], point.geometry.coordinates[0]]}
+      key={point.properties.treeId}
+      icon={treeIcon}
+    />
+  ));
 };
 
 const Leaflet = () => {
